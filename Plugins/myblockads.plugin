@@ -1,6 +1,6 @@
 #!name = 去广告插件
 #!desc = 开屏广告净化插件
-#!date = 2025-10-25
+#!date = 2026-1-11
 
 [Rewrite]
 #爱思助手 //list-app-m.i4.cn
@@ -116,17 +116,6 @@
 ^https?:\/\/cloud\.189\.cn\/include\/splash\/ reject-dict
 ^https?:\/\/zt-app\.go189\.cn\/zt-app\/welcome\/.*?Animation reject-dict
 
-#>中国联通
-#移除主页几个小按钮
-^https:\/\/m\.client\.10010\.com\/clientIndex\/v1\/api\/navHome response-body-json-jq '.datas.homeTopMenuItems |= map(select(.menuName != "通通" and .menuName != "签到"))'
-
-#移除主页浮窗和底部推广
-^https:\/\/m\.client\.10010\.com\/clientIndex\/homefusion\/fuInter response-body-json-jq 'del(.["HomeFusion.fuchuangAdv_A8"], .["HomeFusion.bottomLabel"])'
-
-#移除搜索框推广
-^https:\/\/m\.client\.10010\.com\/search_service\/tyfbSearch\/searchDiscoverListExpress response-body-json-jq '.data = []'
-^https:\/\/m\.client\.10010\.com\/search_service\/search\/searchScrollWord response-body-json-jq '.["113000004"] = []'
-
 #>sukebei.nyaa.si网站
 ^https:\/\/cdn\.tsyndicate\.com\/sdk\/v1 reject-200
 
@@ -134,9 +123,15 @@
 ^https:\/\/ntvpforever\.com\/in\/multy reject-dict
 ^https:\/\/b2279fe066\.be3413a996\.com\/in\/multy reject-dict
 
+#记艺
+^http:\/\/art-memory\.com\/jy-rest\/jyData\/getAddPic reject-dict
+
+#高德地图补充AI
+^https:\/\/ai\.amap\.com\/v1\/ai_rec\/ reject-dict
+
 [Script]
 #>TestFlight
 #http-request ^https?:\/\/testflight\.apple\.com\/v\d\/accounts\/.+?\/install$ script-path=https://gist.githubusercontent.com/NobyDa/9be418b93afc5e9c8a8f4d28ae403cf2/raw/TF_Download.js, requires-body=true, timeout=60, tag=TF_Download
 
 [MITM]
-hostname = ntvpforever.com, b2279fe066.be3413a996.com, m.client.10010.com, flowplus.meituan.net, img.meituan.net, s3plus.meituan.net, cdn.tsyndicate.com, content.21cn.com, m.360buyimg.com,xyst.yuanfudao.com,sec.sginput.qq.com,apiv50-ios.4001113900.com,list-app-m.i4.cn, p0.pipi.cn, osg-service.sgcc.com.cn, mp.weixin.qq.com, wallet.95516.com, app.dewu.com, cdn.poizon.com, static.95508.com, gab.122.gov.cn,  api.bwton.com, api.cloud.189.cn, api.xiachufang.com, a.sinopecsales.com, mbasecc.bas.cmbchina.com, mbasecc.bcs.cmbchina.com, intellicc.bcs.cmbchina.com, mbs.boc.cn, cloud.189.cn, zt-app.go189.cn, appwk.baidu.com, api.sogaha.cn, ad.shunchangzhixing.com, e-static.aia.com.cn, ocrifs.ejoy.sinopec.com, sh-gateway.shihuo.cn, static.shihuocdn.cn, image1.ccb.com, ios.sogou.com, android.sogou.com, h5api.sginput.qq.com
+hostname = art-memory.com, ntvpforever.com, b2279fe066.be3413a996.com, flowplus.meituan.net, img.meituan.net, s3plus.meituan.net, cdn.tsyndicate.com, content.21cn.com, m.360buyimg.com,xyst.yuanfudao.com,sec.sginput.qq.com,apiv50-ios.4001113900.com,list-app-m.i4.cn, p0.pipi.cn, osg-service.sgcc.com.cn, mp.weixin.qq.com, wallet.95516.com, app.dewu.com, cdn.poizon.com, static.95508.com, gab.122.gov.cn,  api.bwton.com, api.cloud.189.cn, api.xiachufang.com, a.sinopecsales.com, mbasecc.bas.cmbchina.com, mbasecc.bcs.cmbchina.com, intellicc.bcs.cmbchina.com, mbs.boc.cn, cloud.189.cn, zt-app.go189.cn, appwk.baidu.com, api.sogaha.cn, ad.shunchangzhixing.com, e-static.aia.com.cn, ocrifs.ejoy.sinopec.com, sh-gateway.shihuo.cn, static.shihuocdn.cn, image1.ccb.com, ios.sogou.com, android.sogou.com, h5api.sginput.qq.com
