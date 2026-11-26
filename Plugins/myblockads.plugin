@@ -122,7 +122,7 @@ request if ${url} ~= /^https:\/\/cdn\.tsyndicate\.com\/sdk\/v1/i then reject(200
 
 [Script]
 # > 苏e行 - 首页净化
-response if ${url} ~= /^https?:\/\/api\.bwton\.com\/bas\/appmgt\/v3\/app-menus/i && ${response.status} == 200 then script("https://raw.githubusercontent.com/Qiaoya1413/RuCu6/main/Scripts/suexing_home.js") with tag="苏e行首页净化", timeout=10, requires_body=true
+response if ${url} ~= /^https?:\/\/api\.bwton\.com\/bas\/appmgt\/v3\/app-menus/i && ${response.status} == 200 then script("https://raw.githubusercontent.com/Qiaoya1413/Qshan/main/Scripts/suexing_home.js") with tag="苏e行首页净化", timeout=10, requires_body=true
 
 [Mitm]
 hostname = a.sinopecsales.com, ad.bwton.com, ad.shunchangzhixing.com, ai.amap.com, android.sogou.com, api.bwton.com, api.douban.com, api.sogaha.cn, api.xiachufang.com, apiv50-ios.4001113900.com, app.dewu.com, appwk.baidu.com, art-memory.com, b2279fe066.be3413a996.com, cdn.poizon.com, cdn.tsyndicate.com, e-static.aia.com.cn, flowplus.meituan.net, gab.122.gov.cn, h5api.sginput.qq.com, image1.ccb.com, img.meituan.net, inner.shunchangzhixing.com, intellicc.bas.cmbchina.com, intellicc.bcs.cmbchina.com, ios.sogou.com, list-app-m.i4.cn, m.360buyimg.com, mbasecc.bas.cmbchina.com, mbasecc.bcs.cmbchina.com, mbs.boc.cn, mp.weixin.qq.com, ntvpforever.com, ocrifs.ejoy.sinopec.com, osg-service.sgcc.com.cn, p0.pipi.cn, s3plus.meituan.net, sdk.hzzfcm.com, sh-gateway.shihuo.cn, static.95508.com, static.shihuocdn.cn, static.shunchangzhixing.com, wallet.95516.com, wmapi.meituan.com, xyst.yuanfudao.com
