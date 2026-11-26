@@ -1,6 +1,5 @@
 #!name = 去广告插件
 #!desc = 自用开屏与页面广告净化插件
-#!icon = https://raw.githubusercontent.com/Qiaoya1413/RuCu6/main/Icons/app/myblockads.png
 #!date = 2026-11-26
 
 [Rewrite]
