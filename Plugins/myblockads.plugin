@@ -1,122 +1,127 @@
 #!name = 去广告插件
-#!desc = 开屏广告净化插件
+#!desc = 自用开屏与页面广告净化插件
 #!icon = https://raw.githubusercontent.com/Qiaoya1413/RuCu6/main/Icons/app/myblockads.png
 #!date = 2026-11-26
 
 [Rewrite]
-# 爱思助手
-^https:\/\/list-app-m\.i4\.cn\/(?:adclickcb|getHotSearchList|getopfstadinfo)\.xhtml reject
+# =============== 出行与地图 =============== #
+# > 高德地图 - AI 推荐
+^https:\/\/ai\.amap\.com\/v1\/ai_rec\/ reject-dict
 
-# 建设银行
-^http:\/\/image1\.ccb\.com\/newsinfo\/eBranch\/check\/(?:nf\/newfin\/activity|po\/poortheme\/activity)\/\w+\.png reject
-
-# 交管12123
+# > 交管 12123
 ^https:\/\/gab\.122\.gov\.cn\/eapp\/m\/sysquery\/adver reject-dict
 
-# 猫眼
+# > 苏e行
+^https?:\/\/api\.bwton\.com\/bas\/ad reject-dict
+^https?:\/\/api\.bwton\.com\/bff\/app\/index\/goods reject-dict
+^https?:\/\/api\.bwton\.com\/bff\/app\/index\/recommend reject-dict
+^https?:\/\/api\.bwton\.com\/bff\/app\/h5\/v1\/station\/goods reject-dict
+^https?:\/\/(?:ad|inner|static)\.shunchangzhixing\.com\/ reject
+^https?:\/\/ad\.bwton\.com\/(?:infoConfig|setGInfo) reject-dict
+^https?:\/\/sdk\.hzzfcm\.com\/report reject-200
+
+# =============== 金融与银行 =============== #
+# > 广发精彩 - 开屏广告
+^https?:\/\/static\.95508\.com\/mmg\/images\/ads\/.+\/(.+1125?.+2436|.+%.+%|.+_.+_) reject-dict
+^https?:\/\/static\.95508\.com\/mmg\/ciop\/sysabbr\/cmep\/images\/apppopupads reject-dict
+
+# > 建设银行
+^http:\/\/image1\.ccb\.com\/newsinfo\/eBranch\/check\/(?:nf\/newfin\/activity|po\/poortheme\/activity)\/\w+\.png reject
+
+# > 友邦
+^https?:\/\/e-static\.aia\.com\.cn\/kyh\/resourcefolder\/ads reject-dict
+
+# > 云闪付
+^https:\/\/wallet\.95516\.com(?::10533)?\/s\/wl\/icon\/large\/1 reject
+
+# > 招商银行
+# 开屏广告
+^https?:\/\/mbasecc\.(?:bas|bcs)\.cmbchina\.com\/Edge\/api\/mlife\.clientface\.clientservice\.api\.advertiseService\/preCacheAdvertiseSec reject-dict
+# 设置栏目内广告
+^https?:\/\/intellicc\.bas\.cmbchina\.com\/Edge\/api\/mlife\.intelli\.render\.api\.render\/getDynamicDataSec reject
+# 首页随机弹窗
+^https?:\/\/intellicc\.bcs\.cmbchina\.com\/Edge\/api\/mlife\.intelli\.adrender\.api\.AdWork\/getAdsBySlotId reject-dict
+
+# > 中国银行
+^https:\/\/mbs\.boc\.cn\/ubas-mgateway-static\/images\/advertType\/.+\.jpg reject-dict
+
+# =============== 购物与生活 =============== #
+# > 得物 - 开屏广告
+^https:\/\/app\.dewu\.com\/api\/v1\/app\/advertisement reject-dict
+^https?:\/\/cdn\.poizon\.com\/node-common\/.*\.jpg reject-dict
+
+# > 京东 - 开屏广告
+^https?:\/\/m\.360buyimg\.com\/mobilecms\/s1125x2436_jfs reject-dict
+
+# > 绿城生活
+^https:\/\/apiv50-ios\.4001113900\.com:7000\/ad reject-dict
+
+# > 猫眼
 ^https:\/\/p0\.pipi\.cn\/(?:adAdmin|mediaplus\/maoyantong_ads_fe)\/\w+\.jpg\?imageMogr2\/quality\/ reject-dict
 ^https:\/\/p0\.pipi\.cn\/(?:adAdmin|mediaplus\/maoyantong_ads_fe)\/\w+\.(?:jpg|png)\?imageMogr2\/thumbnail\/(?:860x0|!165x165|!1049x1169) reject-dict
 
-# 美团 & 美团外卖
+# > 美团 & 美团外卖
 ^http:\/\/wmapi\.meituan\.com\/api\/v7\/(?:loadInfo|openscreen|startpicture) reject-dict
 ^https:\/\/flowplus\.meituan\.net\/v1\/mss_\w+\/linglong\/\d+\.jpg reject-dict
 ^https:\/\/img\.meituan\.net\/bizad\/bizad_brandCpt_\d+\.jpg reject-dict
 ^https:\/\/s3plus\.meituan\.net\/ocean-blk-index\/index\/blk_conf_\d+\.json reject-dict
 ^https:\/\/s3plus\.meituan\.net\/v1\/mss_\w+\/(?:brandcpt-vedio|waimai-alita)\/\w+\.zip$ reject-dict
 
-# 网上国网
-^https:\/\/osg-service\.sgcc\.com\.cn:18600\/emss-pfa-appset-front\/bootpageoutter\/ reject-dict
-
-# 微信
-^https:\/\/mp\.weixin\.qq\.com\/mp\/(?:cps_product_info|getappmsgad|jsmonitor|masonryfeed|relatedarticle) reject-dict
-
-# 云闪付
-^https:\/\/wallet\.95516\.com(:10533)?\/s\/wl\/icon\/large\/1 reject
-
-# 百度文库
-^https?:\/\/appwk\.baidu\.com\/xpage\/interface\/wknaad reject-dict
-
-# 得物开屏广告
-^https:\/\/app\.dewu\.com\/api\/v1\/app\/advertisement reject-dict
-^https?:\/\/cdn\.poizon\.com\/node-common\/.*\.jpg reject-dict
-
-# 豆瓣开屏广告
-^https:\/\/api\.douban\.com\/v2\/app_ads\/splash_show reject-dict
-
-# 广发精彩开屏广告
-^https?:\/\/static\.95508\.com\/mmg\/images\/ads\/.+\/(.+1125?.+2436|.+%.+%|.+_.+_) reject-dict
-^https?:\/\/static\.95508\.com\/mmg\/ciop\/sysabbr\/cmep\/images\/apppopupads reject-dict
-
-# 绿城生活
-^https:\/\/apiv50-ios\.4001113900\.com:7000\/ad reject-dict
-
-# 今日水印相机
-^http:\/\/api\.sogaha\.cn\/ssp\/ad\/get\?ip reject-dict
-
-# 京东
-^https?:\/\/m\.360buyimg\.com\/mobilecms\/s1125x2436_jfs reject-dict
-
-# 苏e行
-^https?:\/\/api\.bwton\.com\/bas\/ad reject-dict
-^https?:\/\/api\.bwton\.com\/bff\/app\/index\/goods reject-dict
-^https?:\/\/api\.bwton\.com\/bff\/app\/index\/recommend reject-dict
-^https?:\/\/api\.bwton\.com\/bff\/app\/h5\/v1\/station\/goods reject-dict
-^https?:\/\/(ad|inner|static)\.shunchangzhixing\.com\/ reject
-^https?:\/\/ad\.bwton\.com\/(infoConfig|setGInfo) reject-dict
-^https?:\/\/sdk\.hzzfcm\.com\/report reject-200
-
-# 搜狗输入法
-# 开屏广告
-^https?:\/\/(ios|android)\.sogou\.com\/[^/]+\/sogou_input_[^/]+\/[^/]+\/index\.html reject
-# 屏蔽游戏中心
-^https?:\/\/h5api\.sginput\.qq\.com\/v1\/gcenter\/ios\/homepage reject-dict
-
-# 识货开屏广告
-^https?:\/\/sh-gateway\.shihuo\.cn\/v\d\/services\/sh-adapi\/home\/(screen|ad) reject
+# > 识货 - 开屏广告
+^https?:\/\/sh-gateway\.shihuo\.cn\/v\d\/services\/sh-adapi\/home\/(?:screen|ad) reject
 ^https?:\/\/static\.shihuocdn\.cn\/admin\/imgs\/202[0-9]{5}\/[a-z0-9]{32}_513x777\.png reject-200
 ^https?:\/\/static\.shihuocdn\.cn\/admin\/imgs\/202[0-9]{5}\/[a-z0-9]{32}_750x1624\.png reject-200
 
-# 下厨房
+# > 网上国网
+^https:\/\/osg-service\.sgcc\.com\.cn:18600\/emss-pfa-appset-front\/bootpageoutter\/ reject-dict
+
+# > 下厨房
 ^https?:\/\/api\.xiachufang\.com\/v\d\/ad\/ reject
 
-# 小猿搜题
-^https:\/\/xyst\.yuanfudao\.com\/iphone\/splashesV2\/ reject-dict
-
-# 易捷加油
+# > 易捷加油
 # 开屏广告
 ^https:\/\/a\.sinopecsales\.com\/app\/cms reject-dict
 # 底部横幅广告
 ^https?:\/\/ocrifs\.ejoy\.sinopec\.com\/advertitfs\/advert\/findAdvertInfo reject-dict
 
-# 友邦
-^https?:\/\/e-static\.aia\.com\.cn\/kyh\/resourcefolder\/ads reject-dict
+# =============== 社交与工具 =============== #
+# > 爱思助手
+^https:\/\/list-app-m\.i4\.cn\/(?:adclickcb|getHotSearchList|getopfstadinfo)\.xhtml reject
 
-# 招商银行
+# > 百度文库
+^https?:\/\/appwk\.baidu\.com\/xpage\/interface\/wknaad reject-dict
+
+# > 豆瓣 - 开屏广告
+^https:\/\/api\.douban\.com\/v2\/app_ads\/splash_show reject-dict
+
+# > 记艺
+^http:\/\/art-memory\.com\/jy-rest\/jyData\/getAddPic reject-dict
+
+# > 今日水印相机
+^http:\/\/api\.sogaha\.cn\/ssp\/ad\/get\?ip reject-dict
+
+# > 搜狗输入法
 # 开屏广告
-^https?:\/\/mbasecc\.(bas|bcs)\.cmbchina\.com\/Edge\/api\/mlife\.clientface\.clientservice\.api\.advertiseService\/preCacheAdvertiseSec reject-dict
-# 设置栏目内广告
-^https?:\/\/intellicc\.bas\.cmbchina\.com\/Edge\/api\/mlife\.intelli\.render\.api\.render\/getDynamicDataSec reject
-# 首页随机弹窗
-^https?:\/\/intellicc\.bcs\.cmbchina\.com\/Edge\/api\/mlife\.intelli\.adrender\.api\.AdWork\/getAdsBySlotId reject-dict
+^https?:\/\/(?:ios|android)\.sogou\.com\/[^/]+\/sogou_input_[^/]+\/[^/]+\/index\.html reject
+# 游戏中心
+^https?:\/\/h5api\.sginput\.qq\.com\/v1\/gcenter\/ios\/homepage reject-dict
 
-# 中国银行
-^https:\/\/mbs\.boc\.cn\/ubas-mgateway-static\/images\/advertType\/.+\.jpg reject-dict
+# > 微信
+^https:\/\/mp\.weixin\.qq\.com\/mp\/(?:cps_product_info|getappmsgad|jsmonitor|masonryfeed|relatedarticle) reject-dict
 
-# sukebei.nyaa.si 网站
-^https:\/\/cdn\.tsyndicate\.com\/sdk\/v1 reject-200
+# > 小猿搜题
+^https:\/\/xyst\.yuanfudao\.com\/iphone\/splashesV2\/ reject-dict
 
-# gying.org 网站
+# =============== 网页广告 =============== #
+# > gying.org
 ^https:\/\/ntvpforever\.com\/in\/multy reject-dict
 ^https:\/\/b2279fe066\.be3413a996\.com\/in\/multy reject-dict
 
-# 记艺
-^http:\/\/art-memory\.com\/jy-rest\/jyData\/getAddPic reject-dict
-
-# 高德地图补充 AI
-^https:\/\/ai\.amap\.com\/v1\/ai_rec\/ reject-dict
+# > sukebei.nyaa.si
+^https:\/\/cdn\.tsyndicate\.com\/sdk\/v1 reject-200
 
 [Script]
-# 苏e行首页净化
+# > 苏e行 - 首页净化
 http-response ^https?:\/\/api\.bwton\.com\/bas\/appmgt\/v3\/app-menus script-path = https://raw.githubusercontent.com/Qiaoya1413/RuCu6/main/Scripts/suexing_home.js, requires-body = true, timeout = 10, tag = 苏e行首页净化
 
 [MITM]
