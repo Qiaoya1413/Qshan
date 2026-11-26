@@ -1,127 +1,128 @@
 #!name = 去广告插件
 #!desc = 自用开屏与页面广告净化插件
+#!loon_version = 3.5.1(983)
 #!date = 2026-11-26
 
 [Rewrite]
 # =============== 出行与地图 =============== #
 # > 高德地图 - AI 推荐
-^https:\/\/ai\.amap\.com\/v1\/ai_rec\/ reject-dict
+request if ${url} ~= /^https:\/\/ai\.amap\.com\/v1\/ai_rec\//i then reject_dict(200)
 
 # > 交管 12123
-^https:\/\/gab\.122\.gov\.cn\/eapp\/m\/sysquery\/adver reject-dict
+request if ${url} ~= /^https:\/\/gab\.122\.gov\.cn\/eapp\/m\/sysquery\/adver/i then reject_dict(200)
 
 # > 苏e行
-^https?:\/\/api\.bwton\.com\/bas\/ad reject-dict
-^https?:\/\/api\.bwton\.com\/bff\/app\/index\/goods reject-dict
-^https?:\/\/api\.bwton\.com\/bff\/app\/index\/recommend reject-dict
-^https?:\/\/api\.bwton\.com\/bff\/app\/h5\/v1\/station\/goods reject-dict
-^https?:\/\/(?:ad|inner|static)\.shunchangzhixing\.com\/ reject
-^https?:\/\/ad\.bwton\.com\/(?:infoConfig|setGInfo) reject-dict
-^https?:\/\/sdk\.hzzfcm\.com\/report reject-200
+request if ${url} ~= /^https?:\/\/api\.bwton\.com\/bas\/ad/i then reject_dict(200)
+request if ${url} ~= /^https?:\/\/api\.bwton\.com\/bff\/app\/index\/goods/i then reject_dict(200)
+request if ${url} ~= /^https?:\/\/api\.bwton\.com\/bff\/app\/index\/recommend/i then reject_dict(200)
+request if ${url} ~= /^https?:\/\/api\.bwton\.com\/bff\/app\/h5\/v1\/station\/goods/i then reject_dict(200)
+request if ${url} ~= /^https?:\/\/(?:ad|inner|static)\.shunchangzhixing\.com\//i then reject(404)
+request if ${url} ~= /^https?:\/\/ad\.bwton\.com\/(?:infoConfig|setGInfo)/i then reject_dict(200)
+request if ${url} ~= /^https?:\/\/sdk\.hzzfcm\.com\/report/i then reject(200)
 
 # =============== 金融与银行 =============== #
 # > 广发精彩 - 开屏广告
-^https?:\/\/static\.95508\.com\/mmg\/images\/ads\/.+\/(.+1125?.+2436|.+%.+%|.+_.+_) reject-dict
-^https?:\/\/static\.95508\.com\/mmg\/ciop\/sysabbr\/cmep\/images\/apppopupads reject-dict
+request if ${url} ~= /^https?:\/\/static\.95508\.com\/mmg\/images\/ads\/.+\/(.+1125?.+2436|.+%.+%|.+_.+_)/i then reject_dict(200)
+request if ${url} ~= /^https?:\/\/static\.95508\.com\/mmg\/ciop\/sysabbr\/cmep\/images\/apppopupads/i then reject_dict(200)
 
 # > 建设银行
-^http:\/\/image1\.ccb\.com\/newsinfo\/eBranch\/check\/(?:nf\/newfin\/activity|po\/poortheme\/activity)\/\w+\.png reject
+request if ${url} ~= /^http:\/\/image1\.ccb\.com\/newsinfo\/eBranch\/check\/(?:nf\/newfin\/activity|po\/poortheme\/activity)\/\w+\.png/i then reject(404)
 
 # > 友邦
-^https?:\/\/e-static\.aia\.com\.cn\/kyh\/resourcefolder\/ads reject-dict
+request if ${url} ~= /^https?:\/\/e-static\.aia\.com\.cn\/kyh\/resourcefolder\/ads/i then reject_dict(200)
 
 # > 云闪付
-^https:\/\/wallet\.95516\.com(?::10533)?\/s\/wl\/icon\/large\/1 reject
+request if ${url} ~= /^https:\/\/wallet\.95516\.com(?::10533)?\/s\/wl\/icon\/large\/1/i then reject(404)
 
 # > 招商银行
 # 开屏广告
-^https?:\/\/mbasecc\.(?:bas|bcs)\.cmbchina\.com\/Edge\/api\/mlife\.clientface\.clientservice\.api\.advertiseService\/preCacheAdvertiseSec reject-dict
+request if ${url} ~= /^https?:\/\/mbasecc\.(?:bas|bcs)\.cmbchina\.com\/Edge\/api\/mlife\.clientface\.clientservice\.api\.advertiseService\/preCacheAdvertiseSec/i then reject_dict(200)
 # 设置栏目内广告
-^https?:\/\/intellicc\.bas\.cmbchina\.com\/Edge\/api\/mlife\.intelli\.render\.api\.render\/getDynamicDataSec reject
+request if ${url} ~= /^https?:\/\/intellicc\.bas\.cmbchina\.com\/Edge\/api\/mlife\.intelli\.render\.api\.render\/getDynamicDataSec/i then reject(404)
 # 首页随机弹窗
-^https?:\/\/intellicc\.bcs\.cmbchina\.com\/Edge\/api\/mlife\.intelli\.adrender\.api\.AdWork\/getAdsBySlotId reject-dict
+request if ${url} ~= /^https?:\/\/intellicc\.bcs\.cmbchina\.com\/Edge\/api\/mlife\.intelli\.adrender\.api\.AdWork\/getAdsBySlotId/i then reject_dict(200)
 
 # > 中国银行
-^https:\/\/mbs\.boc\.cn\/ubas-mgateway-static\/images\/advertType\/.+\.jpg reject-dict
+request if ${url} ~= /^https:\/\/mbs\.boc\.cn\/ubas-mgateway-static\/images\/advertType\/.+\.jpg/i then reject_dict(200)
 
 # =============== 购物与生活 =============== #
 # > 得物 - 开屏广告
-^https:\/\/app\.dewu\.com\/api\/v1\/app\/advertisement reject-dict
-^https?:\/\/cdn\.poizon\.com\/node-common\/.*\.jpg reject-dict
+request if ${url} ~= /^https:\/\/app\.dewu\.com\/api\/v1\/app\/advertisement/i then reject_dict(200)
+request if ${url} ~= /^https?:\/\/cdn\.poizon\.com\/node-common\/.*\.jpg/i then reject_dict(200)
 
 # > 京东 - 开屏广告
-^https?:\/\/m\.360buyimg\.com\/mobilecms\/s1125x2436_jfs reject-dict
+request if ${url} ~= /^https?:\/\/m\.360buyimg\.com\/mobilecms\/s1125x2436_jfs/i then reject_dict(200)
 
 # > 绿城生活
-^https:\/\/apiv50-ios\.4001113900\.com:7000\/ad reject-dict
+request if ${url} ~= /^https:\/\/apiv50-ios\.4001113900\.com:7000\/ad/i then reject_dict(200)
 
 # > 猫眼
-^https:\/\/p0\.pipi\.cn\/(?:adAdmin|mediaplus\/maoyantong_ads_fe)\/\w+\.jpg\?imageMogr2\/quality\/ reject-dict
-^https:\/\/p0\.pipi\.cn\/(?:adAdmin|mediaplus\/maoyantong_ads_fe)\/\w+\.(?:jpg|png)\?imageMogr2\/thumbnail\/(?:860x0|!165x165|!1049x1169) reject-dict
+request if ${url} ~= /^https:\/\/p0\.pipi\.cn\/(?:adAdmin|mediaplus\/maoyantong_ads_fe)\/\w+\.jpg\?imageMogr2\/quality\//i then reject_dict(200)
+request if ${url} ~= /^https:\/\/p0\.pipi\.cn\/(?:adAdmin|mediaplus\/maoyantong_ads_fe)\/\w+\.(?:jpg|png)\?imageMogr2\/thumbnail\/(?:860x0|!165x165|!1049x1169)/i then reject_dict(200)
 
 # > 美团 & 美团外卖
-^http:\/\/wmapi\.meituan\.com\/api\/v7\/(?:loadInfo|openscreen|startpicture) reject-dict
-^https:\/\/flowplus\.meituan\.net\/v1\/mss_\w+\/linglong\/\d+\.jpg reject-dict
-^https:\/\/img\.meituan\.net\/bizad\/bizad_brandCpt_\d+\.jpg reject-dict
-^https:\/\/s3plus\.meituan\.net\/ocean-blk-index\/index\/blk_conf_\d+\.json reject-dict
-^https:\/\/s3plus\.meituan\.net\/v1\/mss_\w+\/(?:brandcpt-vedio|waimai-alita)\/\w+\.zip$ reject-dict
+request if ${url} ~= /^http:\/\/wmapi\.meituan\.com\/api\/v7\/(?:loadInfo|openscreen|startpicture)/i then reject_dict(200)
+request if ${url} ~= /^https:\/\/flowplus\.meituan\.net\/v1\/mss_\w+\/linglong\/\d+\.jpg/i then reject_dict(200)
+request if ${url} ~= /^https:\/\/img\.meituan\.net\/bizad\/bizad_brandCpt_\d+\.jpg/i then reject_dict(200)
+request if ${url} ~= /^https:\/\/s3plus\.meituan\.net\/ocean-blk-index\/index\/blk_conf_\d+\.json/i then reject_dict(200)
+request if ${url} ~= /^https:\/\/s3plus\.meituan\.net\/v1\/mss_\w+\/(?:brandcpt-vedio|waimai-alita)\/\w+\.zip$/i then reject_dict(200)
 
 # > 识货 - 开屏广告
-^https?:\/\/sh-gateway\.shihuo\.cn\/v\d\/services\/sh-adapi\/home\/(?:screen|ad) reject
-^https?:\/\/static\.shihuocdn\.cn\/admin\/imgs\/202[0-9]{5}\/[a-z0-9]{32}_513x777\.png reject-200
-^https?:\/\/static\.shihuocdn\.cn\/admin\/imgs\/202[0-9]{5}\/[a-z0-9]{32}_750x1624\.png reject-200
+request if ${url} ~= /^https?:\/\/sh-gateway\.shihuo\.cn\/v\d\/services\/sh-adapi\/home\/(?:screen|ad)/i then reject(404)
+request if ${url} ~= /^https?:\/\/static\.shihuocdn\.cn\/admin\/imgs\/202[0-9]{5}\/[a-z0-9]{32}_513x777\.png/i then reject(200)
+request if ${url} ~= /^https?:\/\/static\.shihuocdn\.cn\/admin\/imgs\/202[0-9]{5}\/[a-z0-9]{32}_750x1624\.png/i then reject(200)
 
 # > 网上国网
-^https:\/\/osg-service\.sgcc\.com\.cn:18600\/emss-pfa-appset-front\/bootpageoutter\/ reject-dict
+request if ${url} ~= /^https:\/\/osg-service\.sgcc\.com\.cn:18600\/emss-pfa-appset-front\/bootpageoutter\//i then reject_dict(200)
 
 # > 下厨房
-^https?:\/\/api\.xiachufang\.com\/v\d\/ad\/ reject
+request if ${url} ~= /^https?:\/\/api\.xiachufang\.com\/v\d\/ad\//i then reject(404)
 
 # > 易捷加油
 # 开屏广告
-^https:\/\/a\.sinopecsales\.com\/app\/cms reject-dict
+request if ${url} ~= /^https:\/\/a\.sinopecsales\.com\/app\/cms/i then reject_dict(200)
 # 底部横幅广告
-^https?:\/\/ocrifs\.ejoy\.sinopec\.com\/advertitfs\/advert\/findAdvertInfo reject-dict
+request if ${url} ~= /^https?:\/\/ocrifs\.ejoy\.sinopec\.com\/advertitfs\/advert\/findAdvertInfo/i then reject_dict(200)
 
 # =============== 社交与工具 =============== #
 # > 爱思助手
-^https:\/\/list-app-m\.i4\.cn\/(?:adclickcb|getHotSearchList|getopfstadinfo)\.xhtml reject
+request if ${url} ~= /^https:\/\/list-app-m\.i4\.cn\/(?:adclickcb|getHotSearchList|getopfstadinfo)\.xhtml/i then reject(404)
 
 # > 百度文库
-^https?:\/\/appwk\.baidu\.com\/xpage\/interface\/wknaad reject-dict
+request if ${url} ~= /^https?:\/\/appwk\.baidu\.com\/xpage\/interface\/wknaad/i then reject_dict(200)
 
 # > 豆瓣 - 开屏广告
-^https:\/\/api\.douban\.com\/v2\/app_ads\/splash_show reject-dict
+request if ${url} ~= /^https:\/\/api\.douban\.com\/v2\/app_ads\/splash_show/i then reject_dict(200)
 
 # > 记艺
-^http:\/\/art-memory\.com\/jy-rest\/jyData\/getAddPic reject-dict
+request if ${url} ~= /^http:\/\/art-memory\.com\/jy-rest\/jyData\/getAddPic/i then reject_dict(200)
 
 # > 今日水印相机
-^http:\/\/api\.sogaha\.cn\/ssp\/ad\/get\?ip reject-dict
+request if ${url} ~= /^http:\/\/api\.sogaha\.cn\/ssp\/ad\/get\?ip/i then reject_dict(200)
 
 # > 搜狗输入法
 # 开屏广告
-^https?:\/\/(?:ios|android)\.sogou\.com\/[^/]+\/sogou_input_[^/]+\/[^/]+\/index\.html reject
+request if ${url} ~= /^https?:\/\/(?:ios|android)\.sogou\.com\/[^\/]+\/sogou_input_[^\/]+\/[^\/]+\/index\.html/i then reject(404)
 # 游戏中心
-^https?:\/\/h5api\.sginput\.qq\.com\/v1\/gcenter\/ios\/homepage reject-dict
+request if ${url} ~= /^https?:\/\/h5api\.sginput\.qq\.com\/v1\/gcenter\/ios\/homepage/i then reject_dict(200)
 
 # > 微信
-^https:\/\/mp\.weixin\.qq\.com\/mp\/(?:cps_product_info|getappmsgad|jsmonitor|masonryfeed|relatedarticle) reject-dict
+request if ${url} ~= /^https:\/\/mp\.weixin\.qq\.com\/mp\/(?:cps_product_info|getappmsgad|jsmonitor|masonryfeed|relatedarticle)/i then reject_dict(200)
 
 # > 小猿搜题
-^https:\/\/xyst\.yuanfudao\.com\/iphone\/splashesV2\/ reject-dict
+request if ${url} ~= /^https:\/\/xyst\.yuanfudao\.com\/iphone\/splashesV2\//i then reject_dict(200)
 
 # =============== 网页广告 =============== #
 # > gying.org
-^https:\/\/ntvpforever\.com\/in\/multy reject-dict
-^https:\/\/b2279fe066\.be3413a996\.com\/in\/multy reject-dict
+request if ${url} ~= /^https:\/\/ntvpforever\.com\/in\/multy/i then reject_dict(200)
+request if ${url} ~= /^https:\/\/b2279fe066\.be3413a996\.com\/in\/multy/i then reject_dict(200)
 
 # > sukebei.nyaa.si
-^https:\/\/cdn\.tsyndicate\.com\/sdk\/v1 reject-200
+request if ${url} ~= /^https:\/\/cdn\.tsyndicate\.com\/sdk\/v1/i then reject(200)
 
 [Script]
 # > 苏e行 - 首页净化
-http-response ^https?:\/\/api\.bwton\.com\/bas\/appmgt\/v3\/app-menus script-path = https://raw.githubusercontent.com/Qiaoya1413/RuCu6/main/Scripts/suexing_home.js, requires-body = true, timeout = 10, tag = 苏e行首页净化
+response if ${url} ~= /^https?:\/\/api\.bwton\.com\/bas\/appmgt\/v3\/app-menus/i && ${response.status} == 200 then script("https://raw.githubusercontent.com/Qiaoya1413/RuCu6/main/Scripts/suexing_home.js") with tag="苏e行首页净化", timeout=10, requires_body=true
 
-[MITM]
+[Mitm]
 hostname = a.sinopecsales.com, ad.bwton.com, ad.shunchangzhixing.com, ai.amap.com, android.sogou.com, api.bwton.com, api.douban.com, api.sogaha.cn, api.xiachufang.com, apiv50-ios.4001113900.com, app.dewu.com, appwk.baidu.com, art-memory.com, b2279fe066.be3413a996.com, cdn.poizon.com, cdn.tsyndicate.com, e-static.aia.com.cn, flowplus.meituan.net, gab.122.gov.cn, h5api.sginput.qq.com, image1.ccb.com, img.meituan.net, inner.shunchangzhixing.com, intellicc.bas.cmbchina.com, intellicc.bcs.cmbchina.com, ios.sogou.com, list-app-m.i4.cn, m.360buyimg.com, mbasecc.bas.cmbchina.com, mbasecc.bcs.cmbchina.com, mbs.boc.cn, mp.weixin.qq.com, ntvpforever.com, ocrifs.ejoy.sinopec.com, osg-service.sgcc.com.cn, p0.pipi.cn, s3plus.meituan.net, sdk.hzzfcm.com, sh-gateway.shihuo.cn, static.95508.com, static.shihuocdn.cn, static.shunchangzhixing.com, wallet.95516.com, wmapi.meituan.com, xyst.yuanfudao.com
